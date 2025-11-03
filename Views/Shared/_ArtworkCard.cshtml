@@ -1,0 +1,10 @@
+﻿@model Artwork
+<div class="art-card">
+    <a class="thumb" href="@Url.Action("Details", "Portfolios", new { id = Model.Id })" title="@Model.Title">
+        <img src="@Model.ImageUrl" alt="@Model.Title" loading="lazy" />
+    </a>
+    <div class="meta">
+        <div class="title" title="@Model.Title">@Model.Title</div>
+        <div class="date">@Model.UploadDate.ToLocalTime().ToString("yyyy/MM/dd")</div>
+    </div>
+</div>

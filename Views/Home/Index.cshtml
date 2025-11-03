@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Artwork>
+@{
+    ViewData["Title"] = "最新作品";
+}
+
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <div class="empty-tip">
+        目前還沒有作品，登入後到「上傳作品」頁試試吧！
+    </div>
+}
+else
+{
+    <div class="art-grid">
+        @foreach (var a in Model)
+        {
+            @Html.Partial("_ArtworkCard", a)
+        }
+    </div>
+}
