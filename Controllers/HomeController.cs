@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Data;
 
 public class HomeController : Controller
@@ -12,4 +11,5 @@ public class HomeController : Controller
     {
         return View();
     }
+
 }
