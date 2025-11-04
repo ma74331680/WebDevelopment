@@ -37,10 +37,10 @@
                         @if (User.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Portfolios" asp-action="Create">上傳作品</a>
+                                <a class="nav-link" asp-controller="Artwork" asp-action="Upload">上傳作品</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Portfolios" asp-action="My">我的作品</a>
+                                <a class="nav-link" asp-controller="Artwork" asp-action="My">我的作品</a>
                             </li>
                         }
                     </ul>

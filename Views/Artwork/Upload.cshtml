@@ -1,11 +1,12 @@
-﻿@model ArtworkCreateVm
+﻿@using WebDevelopment.ViewModels
+@model ArtworkCreateVm
 @{
     ViewData["Title"] = "上傳作品";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create" method="post" enctype="multipart/form-data" class="upload-form">
+<form asp-action="Upload" method="post" enctype="multipart/form-data" class="upload-form">
     @Html.AntiForgeryToken()
 
     <div class="form-group">
@@ -50,8 +51,3 @@
     </script>
 }
 
-<style>
-    .upload-form { max-width: 640px; }
-    .preview-box { margin: 12px 0; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
-    .preview-box img { display:block; width:100%; height:auto; }
-</style>

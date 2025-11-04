@@ -1,0 +1,49 @@
+﻿@model WebDevelopment.Models.Artwork
+@{
+    ViewData["Title"] = Model.Title ?? "作品詳細";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <!-- 標題 -->
+            <h2 class="mb-3 text-center">@Model.Title</h2>
+
+            <!-- 上傳日期與作者 -->
+            <p class="text-muted text-center">
+                上傳時間：@Model.UploadDate.ToLocalTime().ToString("yyyy/MM/dd HH:mm")<br />
+                作者代號：@ViewBag.ArtistName
+            </p>
+
+            <hr />
+
+            <!-- 作品圖片 -->
+            <div class="text-center mb-4">
+                <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid rounded shadow" style="max-height:500px; object-fit:contain;" />
+            </div>
+
+            <!-- 描述 -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">作品介紹</h5>
+                    <p class="card-text">@Model.Description</p>
+                </div>
+            </div>
+
+            <!-- 返回或我的作品 -->
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    ← 返回首頁
+                </a>
+
+                @if (User.Identity?.IsAuthenticated == true &&
+                                Model.ArtistName == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                {
+                    <a asp-action="My" class="btn btn-primary">查看我的作品</a>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

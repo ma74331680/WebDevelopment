@@ -1,6 +1,6 @@
 ﻿@model Artwork
 <div class="art-card">
-    <a class="thumb" href="@Url.Action("Details", "Portfolios", new { id = Model.Id })" title="@Model.Title">
+    <a class="thumb" href="@Url.Action("Details", "Artwork", new { id = Model.Id })" title="@Model.Title">
         <img src="@Model.ImageUrl" alt="@Model.Title" loading="lazy" />
     </a>
     <div class="meta">

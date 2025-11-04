@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Data;
 using WebDevelopment.Models;
+using WebDevelopment.ViewModels;
 
 [Authorize] // 需登入才可上傳
 public class ArtworkController : Controller
@@ -31,11 +32,11 @@ public class ArtworkController : Controller
     }
 
     // GET: /Artwork/Create
-    public IActionResult Create() => View(new ArtworkCreateVm());
+    public IActionResult Upload() => View(new ArtworkCreateVm());
 
     // POST: /Artwork/Create
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(ArtworkCreateVm vm, IFormFile image)
+    public async Task<IActionResult> Upload(ArtworkCreateVm vm, IFormFile image)
     {
         // 1) 基本表單驗證
         if (image == null || image.Length == 0)
@@ -94,10 +95,13 @@ public class ArtworkController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
-        // Artwork.Id 在模型為 int（非 Guid），且模型沒有 User 導覽屬性，
-        // 所以直接用 Id 查詢即可
         var model = await _db.Artworks.FirstOrDefaultAsync(a => a.Id == id);
         if (model == null) return NotFound();
+
+        // 查作者的 UserName
+        var user = await _userManager.FindByIdAsync(model.ArtistName);
+        ViewBag.ArtistName = user?.UserName ?? "未知作者";
+
         return View(model);
     }
 }

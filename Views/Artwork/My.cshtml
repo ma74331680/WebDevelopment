@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebDevelopment.Models.Artwork>
+@{
+    ViewData["Title"] = "我的作品";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">我的作品</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            目前沒有上傳任何作品。
+            <a asp-action="Create" class="alert-link">立即上傳</a>。
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var art in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <a asp-action="Details" asp-route-id="@art.Id">
+                            <img src="@art.ImageUrl" class="card-img-top" alt="@art.Title" style="height:220px; object-fit:cover;" />
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate">@art.Title</h5>
+                            <p class="card-text text-muted small mb-1">
+                                上傳時間：@art.UploadDate.ToLocalTime().ToString("yyyy/MM/dd HH:mm")
+                            </p>
+                            <p class="card-text small">@art.Description</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 text-end">
+                            <a asp-action="Details" asp-route-id="@art.Id" class="btn btn-sm btn-outline-primary">
+                                查看詳細
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="text-center mt-4">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-upload"></i> 上傳新作品
+        </a>
+        <a asp-action="Index" class="btn btn-outline-secondary ms-2">
+            返回首頁
+        </a>
+    </div>
+</div>
