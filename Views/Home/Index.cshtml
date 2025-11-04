@@ -1,22 +1,15 @@
-﻿@model IEnumerable<Artwork>
+﻿@model IEnumerable<WebDevelopment.Models.Artwork>?
+
 @{
-    ViewData["Title"] = "最新作品";
+    ViewData["Title"] = "首頁";
 }
 
-<h2 class="mb-3">@ViewData["Title"]</h2>
-
-@if (!Model.Any())
-{
-    <div class="empty-tip">
-        目前還沒有作品，登入後到「上傳作品」頁試試吧！
+<div class="container py-5">
+    <!-- Hero -->
+    <div class="jumbotron p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-3">
+            <h1 class="display-5 fw-bold">Vtuber繪師媒合平台</h1>
+            <p class="col-md-8 fs-5 text-muted">上傳並分享你的作品，瀏覽其他繪師的作品集。</p>
+        </div>
     </div>
-}
-else
-{
-    <div class="art-grid">
-        @foreach (var a in Model)
-        {
-            @Html.Partial("_ArtworkCard", a)
-        }
-    </div>
-}
+</div>

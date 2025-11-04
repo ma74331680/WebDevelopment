@@ -19,6 +19,17 @@ public class ArtworkController : Controller
         _env = env;
     }
 
+    public async Task<IActionResult> Index()
+    {
+        var latest = await _db.Artworks
+            .AsNoTracking()
+            .OrderByDescending(a => a.UploadDate)
+            .Take(12)                     // 首頁顯示 12 張
+            .ToListAsync();
+
+        return View(latest);
+    }
+
     // GET: /Artwork/Create
     public IActionResult Create() => View(new ArtworkCreateVm());
 
